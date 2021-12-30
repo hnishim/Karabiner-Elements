@@ -1,0 +1,51 @@
+{
+    "title": "Caps lockを日本語変換に利用",
+    "rules": [
+        {
+            "description": "Caps lockを押すたびにF7→F10→F6を循環、Enterでクリア",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": { "key_code": "return_or_enter" },
+                "to": [
+                    { "set_variable": { "name": "press_caps_key", "value": 0 } },
+                    { "key_code": "return_or_enter"}
+                ]
+              },
+              {
+                "type": "basic",
+                "from": { "key_code": "caps_lock" },
+                "to": [
+                    { "set_variable": { "name": "press_caps_key", "value": 0 } },
+                    { "key_code": "f6"}
+                ],
+                "conditions": [
+                  { "type": "variable_if", "name": "press_caps_key", "value": 2 }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": { "key_code": "caps_lock" },
+                "to": [
+                    { "set_variable": { "name": "press_caps_key", "value": 2 } },
+                    { "key_code": "f10"}
+                ],
+                "conditions": [
+                  { "type": "variable_if", "name": "press_caps_key", "value": 1 }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": { "key_code": "caps_lock" },
+                "to": [
+                  { "set_variable": { "name": "press_caps_key", "value": 1 } },
+                  { "key_code": "f7" }
+                ],
+                "conditions": [
+                  { "type": "variable_if", "name": "press_caps_key", "value": 0 }
+                ]
+              }
+            ]
+        }
+    ]
+}
